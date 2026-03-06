@@ -2,25 +2,41 @@
 # Autor:        Leonardo Pereira da Silva
 # Data:         06/03/2026
 # Descrição:    Implementa o Tabuleiro do "Jogo da Vida" e suas Iterações
-#               a partir das entradas um estado inicial predefinido
+#               a partir das um estado inicial predefinido
 #################################################################################
 
-.data       # 0  1  2  3  4  5  6  matriz 7x7
-matrixA:.byte 0, 0, 0, 0, 0, 0, 0 #0     # Tabuleiro Inicial (matriz interna 5x5)
-        .byte 0, 0, 0, 0, 1, 0, 0 #1
-        .byte 0, 1, 1, 1, 0, 0, 0 #2
-        .byte 0, 1, 0, 1, 0, 0, 0 #3     # Fileiras na borda (indeces 0 e 6) são
-        .byte 0, 0, 0, 1, 0, 0, 0 #4     # consideradas fora do tabuleiro
-        .byte 0, 0, 1, 0, 0, 0, 0 #5
-        .byte 0, 0, 0, 0, 0, 0, 0 #6
-matrixB:.space 49                        # Matriz para receber próxima geração
-N_Cols: .word 7
+.data       # 0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20 21  matriz 21x21
+matrixA:.byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #0     # Tabuleiro Inicial (matriz interna 20x20)
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #1
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #2     # Fileiras na borda (indices 0 e 21) são
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #3     # consideradas fora do tabuleiro
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #3
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #4
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #5     
+        .byte 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #6
+        .byte 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #7     
+        .byte 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #8
+        .byte 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #9
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #10
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #11
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #12
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #13
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #14
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #15
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #16
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #17
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #18
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #19
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #20
+        .byte 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #21
+matrixB:.space 482                        # Matriz para receber próxima geração
+N_Cols: .word 22
 
 viva:   .asciiz "|#|"			 # |#| representa uma célula viva
 morta:  .asciiz "| |"			 # | | representa uma célula viva
 nl:     .asciiz "\n"
 
-msg0:    .asciiz "############################################\n#     - Jogo da Vida (Game of Life) -     #\n############################################\n"
+msg0:    .asciiz "############################################################\n#             - Jogo da Vida (Game of Life) -              #\n############################################################\n"
 msg1:   .asciiz "Tabuleiro Inicial:\n"
 msg2:   .asciiz "\nEntre com o número de iterações desejadas: "
 msg3:   .asciiz "\nPróxima geração:\n"
@@ -94,7 +110,7 @@ move $t7, $a0            # $t7 = endereço base da matriz
 
 # LOOP EXTERNO – percorre as linhas da matriz
 LoopExt:
-slti $t3, $t2, 6         # verifica se j < 6
+slti $t3, $t2, 21         # verifica se j < 6
 beq $t3, $zero, SairLoopExt
 
 li $t0, 1                # i = 1 (contador de colunas internas)
@@ -102,7 +118,7 @@ li $t0, 1                # i = 1 (contador de colunas internas)
 # LOOP INTERNO – percorre as colunas da linha
 LoopInt:
 
-slti $t1, $t0, 6         # verifica se i < 6
+slti $t1, $t0, 21         # verifica se i < 6
 beq $t1, $zero, SairLoopInt
 
 # ------------------------------------------------
@@ -182,18 +198,18 @@ DestinoOk:
 
 # início da área interna da matriz destino
 move $s4,$s1       # guarda Base da matriz destino
-addi $s1,$s1,8     # posiciona na primeira célula interna
+addi $s1,$s1,23     # posiciona na primeira célula interna
 
 # ------------------------------------------------
 # Início da varredura da matriz
-addi $s3,$s0,8          # primeira célula interna da matriz atual
+addi $s3,$s0,23          # primeira célula interna da matriz atual
 
 li $t4,1                # j = 1
 
 # LOOP EXTERNO (linhas)
 LoopLinha:
 
-slti $t5,$t4,6
+slti $t5,$t4,21
 beq $t5,$zero,FimAtualiza
 
 li $t0,1                    # i = 1
@@ -202,7 +218,7 @@ move $t1,$s3                # endereço primeira célula
 # LOOP INTERNO (colunas)
 LoopColuna:
 
-slti $t5,$t0,6
+slti $t5,$t0,21
 beq $t5,$zero,ProxLinha
 
 move $t7,$t1                # endereço da célula atual
