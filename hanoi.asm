@@ -1,7 +1,8 @@
 #########################################################################################
 # Autor: 	Yasmin Moreira Soares
 # Data: 	06/03/2026
-# Descrição: 	 Recursão e manipulação da pilha ($sp) para mover $n$ discos entre três pinos (Origem, Auxiliar e Destino), para construir a Torre de Hanói.
+# Descrição: 	 Recursão e manipulação da pilha ($sp) para mover $n$ discos entre três pinos (Origem, Auxiliar e Destino), 
+                para construir a Torre de Hanói.
 #########################################################################################
 
 .data
