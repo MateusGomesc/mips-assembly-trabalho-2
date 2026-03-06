@@ -2,7 +2,7 @@
 # Autor:        Leonardo Pereira da Silva
 # Data:         06/03/2026
 # Descrição:    Implementa o Tabuleiro do "Jogo da Vida" e suas Iterações
-#               a partir das um estado inicial predefinido
+#               a partir de um estado inicial predefinido
 #################################################################################
 
 .data       # 0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20 21  matriz 21x21
