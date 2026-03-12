@@ -1,6 +1,8 @@
 ```assembly
 ############################################################
 # quicksort.asm
+# Autor : Davi Gonçalves Cabeceira
+# Data : 12 / 03 / 2026
 # Implementação do QuickSort em MIPS com função main de teste
 ############################################################
 
