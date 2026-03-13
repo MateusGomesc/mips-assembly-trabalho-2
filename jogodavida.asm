@@ -309,7 +309,8 @@ syscall
 
 li  $v0, 5
 syscall
-move $s7, $v0           # $s7 = contador de iterações
+move $s7, $v0            # $s7 = contador de iterações
+li   $s6, 1              # $s6 = número da geração atual
 
 # ------------------------------------------------
 # LOOP DE ITERAÇÕES
@@ -411,13 +412,13 @@ jr $ra
 ################################################################
 # Função        AtualizaTabuleiro
 # Descrição:    Calcula a próxima geração do Tabuleiro
-# Entradas:     $s0 deve conter o endereço da matriz atual (setado pelo chamador)
+# Entradas:     $s0: endereço da matriz atual
 # Saída:        N/A. (matrixA ou matrixB é atualizada)
 # Reg. Temp.:   $t0-$t9
 ################################################################
 AtualizaTabuleiro:
-# $s0 -> matriz atual  (DEVE ser carregado pelo chamador antes de jr)
-# $s1 -> matriz destino
+# $s0: matriz atual
+# $s1: matriz destino
 lw $s2, N_Cols
 
 # ------------------------------------------------
@@ -517,7 +518,7 @@ j LoopColuna
 
 # ------------------------------------------------
 ProxLinha:
-add $s3, $s3, $s2       # próxima linha na origem (+22 bytes)
+add $s3, $s3, $s2       # próxima linha na origem (+32 bytes)
 addi $s1, $s1, 2        # pula bordas direita e esquerda no destino
 addi $t4, $t4, 1
 j LoopLinha
