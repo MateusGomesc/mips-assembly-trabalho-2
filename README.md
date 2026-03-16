@@ -1,1 +1,0 @@
-# mips-assembly-trabalho-2
